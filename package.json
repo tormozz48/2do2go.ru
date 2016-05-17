@@ -1,0 +1,33 @@
+{
+  "name": "2do2go.ru",
+  "version": "1.0.0",
+  "description": "test tasks project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tormozz48/2do2go.ru.git"
+  },
+  "keywords": [
+    "test",
+    "2do2go",
+    "2do2go.ru",
+    "nodejs",
+    "js",
+    "vacancy"
+  ],
+  "author": "Andrey Kuznetsov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tormozz48/2do2go.ru/issues"
+  },
+  "homepage": "https://github.com/tormozz48/2do2go.ru#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
+  }
+}
