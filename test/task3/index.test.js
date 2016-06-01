@@ -1,6 +1,6 @@
 'use strict';
 
-const makeTree = require('../src/task3');
+const makeTree = require('../../src/task3');
 
 describe('task3', () => {
     it('should convert array to tree', () => {
