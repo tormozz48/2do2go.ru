@@ -2,7 +2,15 @@
 
 const BaseTransformer = require('./base');
 
+/**
+ * Performs sorting of data items array by configured sort criteria
+ * @type {SortTransformer}
+ */
 module.exports = class SortTransformer extends BaseTransformer {
+    /**
+     * Performs transformation on given data
+     * @param {Object[]} data
+     */
     run(data) {
         data = this.baseTransformer.run(data);
 
