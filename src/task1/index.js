@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const transformers = require('./transformers');
 
 /**
@@ -13,39 +14,39 @@ const transformers = require('./transformers');
  * @returns {String}
  */
 module.exports = (jsonData, sort, output) => {
-    let transformer = transformers.DefaultTransformer.create();
+    const operations = [];
 
     //Парсится JSON и извлекается искомый массив с данными
-    transformer = transformers.ParseTransformer.create(transformer, {
+    operations.push(transformers.parseTransformer({
         dataKey: 'data.children'
-    });
+    }));
 
     //В элементах массива оставляются только нужные поля
-    transformer = transformers.ExtractTransformer.create(transformer, {
+    operations.push(transformers.extractTransformer({
         fields: ['id', 'title', 'created_utc', 'score']
-    });
+    }));
 
     //Происходит сортировка элементов массива с переданными параметрами
-    transformer = transformers.SortTransformer.create(transformer, sort || {
+    operations.push(transformers.sortTransformer(_.defaults(sort, {
         field: 'created_utc',
         direction: 'asc'
-    });
+    })));
 
     //Поле(я) даты преобразуется к нужному формату
-    transformer = transformers.DateFormatTransformer.create(transformer, {
+    operations.push(transformers.dateFormatTransformer({
         dateFields: ['created_utc']
-    });
+    }));
     
-    output = output || {type: 'json'};
+    output = _.defaults(output, {type: 'json'});
 
     //Выбирается нужный транформер в зависимости от переданного формата выходных данных
-    const Formatter = {
-        'json': transformers.JSONFormatter,
-        'csv': transformers.CSVFormatter,
-        'sql': transformers.SQLFormatter
+    const formatter = {
+        'json': transformers.outputJSONTransformer,
+        'csv': transformers.outputCSVTransformer,
+        'sql': transformers.outputSQLTransformer
     }[output.type];
 
-    transformer = Formatter.create(transformer, output.options || {});
+    operations.push(formatter(output.options || {}));
 
-    return transformer.run(jsonData);
+    return operations.reduce((prev, item) => item(prev), jsonData);
 };

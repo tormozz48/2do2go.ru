@@ -12,7 +12,7 @@ const result = task1(content,
         direction: 'asc'
     },
     {
-        type: 'json'
+        type: 'csv'
     }
 );
 
