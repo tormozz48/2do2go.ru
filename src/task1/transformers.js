@@ -54,9 +54,7 @@ function sortTransformer(options) {
         'desc': -1
     }[direction];
 
-    return (data) => {
-        return data.sort((a, b) => _direction * (a[field] - b[field]));
-    };
+    return (data) => data.sort((a, b) => _direction * (a[field] - b[field]));
 }
 
 /**
@@ -87,17 +85,12 @@ function dateFormatTransformer(options) {
 /**
  * Transforms data into output JSON format using JSON.stringify
  * @param {Object} options
- * @param {function()} options.replacer
  * @param {Number} options.spaces - number of spaces
  * @returns {function()}
  */
 function outputJSONTransformer(options) {
-    const replacer = options.replacer || null;
     const spaces = options.spaces || 0;
-
-    return (data) => {
-        return JSON.stringify(data, replacer, spaces);
-    };
+    return (data) => JSON.stringify(data, null, spaces);
 }
 
 /**
@@ -146,9 +139,9 @@ function outputSQLTransformer(options) {
 
     const table = options.table || 'table';
 
-    return (data) => {
-        return data.map(item => jsonSql.build({type: 'insert', table, values: item}).query);
-    };
+    return (data) => data
+        .map(item => jsonSql.build({type: 'insert', table, values: item}).query)
+        .join('\n');
 }
 
 module.exports = {
