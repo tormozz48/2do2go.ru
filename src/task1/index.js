@@ -4,49 +4,27 @@ const _ = require('lodash');
 const transformers = require('./transformers');
 
 /**
- * @param {String} jsonData
- * @param {Object} [sort] - sort parameters
- * @param {String} [sort.field] - sorting field
- * @param {String} [sort.direction] - sorting direction (asc, desc)
- * @param {Object} [output] format
- * @param {String} [output.type] - type of output (json, csv, sql ...)
- * @param {Object} [output.options] - output formatter options
+ * @param {String}   jsonData
+ * @param {Object}   [options]
+ * @param {String}   [options.dataKey] - object key which holds target data
+ * @param {String[]} [options.extractFields] - data fields which should be left in final result
+ * @param {Object}   [options.sort] - sort options
+ * @param {Object}   [options.sort.field] - sort field
+ * @param {Object}   [options.sort.direction] - sort direction
+ * @param {Object}   [options.date] - date format options
+ * @param {String[]} [options.date.fields] - date fields which should be formatted
+ * @param {String}   [options.date.format] - date format
+ * @param {Object}   [output] - output format settings
+ * @param {String}   [output.type] - type of output (json, csv, sql ...). Default falue is 'json'
+ * @param {Object}   [output.options] - output formatter options
  * @returns {String}
  */
-module.exports = (jsonData, sort, output) => {
-    const operations = [];
-
-    //Парсится JSON и извлекается искомый массив с данными
-    operations.push(transformers.parseTransformer({
-        dataKey: 'data.children'
-    }));
-
-    //В элементах массива оставляются только нужные поля
-    operations.push(transformers.extractTransformer({
-        fields: ['id', 'title', 'created_utc', 'score']
-    }));
-
-    //Происходит сортировка элементов массива с переданными параметрами
-    operations.push(transformers.sortTransformer(_.defaults(sort, {
-        field: 'created_utc',
-        direction: 'asc'
-    })));
-
-    //Поле(я) даты преобразуется к нужному формату
-    operations.push(transformers.dateFormatTransformer({
-        dateFields: ['created_utc']
-    }));
-    
-    output = _.defaults(output, {type: 'json'});
-
-    //Выбирается нужный транформер в зависимости от переданного формата выходных данных
-    const formatter = {
-        'json': transformers.outputJSONTransformer,
-        'csv': transformers.outputCSVTransformer,
-        'sql': transformers.outputSQLTransformer
-    }[output.type];
-
-    operations.push(formatter(output.options || {}));
-
-    return operations.reduce((prev, item) => item(prev), jsonData);
+module.exports = (jsonData, options, output) => {
+    return new transformers.JSONParseTransformer(options)
+        .next(new transformers.DateFormatTransformer(options))
+        .next(new transformers.AggregateTransformer(options))
+        .next(new transformers.SortTransformer(options))
+        .next(new transformers.ExtractTransformer(options))
+        .next(new transformers.OutputTransformer(output))
+        .run(jsonData);
 };
