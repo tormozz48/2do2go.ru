@@ -4,6 +4,7 @@
   "description": "test tasks project",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint src/**",
     "test": "mocha"
   },
   "repository": {
@@ -25,15 +26,18 @@
   },
   "homepage": "https://github.com/tormozz48/2do2go.ru#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^2.4.5",
-    "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0"
+    "chai": "^4.1.2",
+    "eslint": "^4.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "mocha": "^4.0.1",
+    "sinon": "^4.0.1",
+    "sinon-chai": "^2.14.0"
   },
   "dependencies": {
     "debug": "^3.1.0",
     "json-sql": "^0.3.7",
-    "json2csv": "^3.4.2",
     "lodash": "^4.13.1",
     "moment": "^2.13.0"
   }

@@ -1,19 +1,27 @@
-const _ = require('lodash');
+'use strict';
+
 const debug = debug('task1:transformers:base');
 
+/**
+ * Базовый класс для транформеров
+ * @class BaseTransformer
+ */
 class BaseTransformer {
     constructor(options = {}) {
         this._options = this._parseOptions(options);
         this._lastInStack = null;
         this._next = null;
+
+        debug(`transformer ${this.constructor.name} has been created`);
+        debug(`options: `);
+        debug(this._options);
     }
 
     /**
-     * Parses transformer options
-     * @param {Object} options 
+     * Parses transformer options 
      * @memberof BaseTransformer
      */
-    parseOptions(options) {
+    parseOptions() {
         throw new Error('not implmented');
     }
 
@@ -50,10 +58,9 @@ class BaseTransformer {
 
     /**
      * Transforms given data
-     * @param {any} data 
      * @memberof BaseTransformer
      */
-    transform(data) {
+    transform() {
         throw new Error('not implemented');
     }
 }

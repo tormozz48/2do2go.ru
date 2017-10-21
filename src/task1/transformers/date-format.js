@@ -5,7 +5,7 @@ const moment = require('moment');
 const BaseTransformer = require('./base');
 
 /**
- * 
+ * Форматирует поля даты/времени
  * @class DateFormatTransformer
  * @extends {BaseTransformer}
  */
@@ -15,13 +15,15 @@ class DateFormatTransformer extends BaseTransformer {
     }
 
     transform(data) {
-        if(_.isEmpty(this._options.fields)) {
+        const {fields, format} = this._options.date;
+
+        if(_.isEmpty(fields)) {
             return data;
         }
 
         return data.map(item => {
-            dateFields.forEach(field => {
-                item[field] = moment(item[field] * 1000).format(this._options.format);
+            fields.forEach(field => {
+                item[field] = moment(item[field] * 1000).format(format);
             });
             return item;
         });

@@ -4,7 +4,8 @@ const _ = require('lodash');
 const BaseTransformer = require('./base');
 
 /**
-* @class AggregateTransformer
+ * Нужен для аггрегации данных по какому-либо из полей
+ * @class AggregateTransformer
  * @extends {BaseTransformer}
  */
 class AggregateTransformer extends BaseTransformer {
