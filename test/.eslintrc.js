@@ -13,6 +13,7 @@ module.exports = {
     rules: {
         'no-useless-escape': 'off',
         'object-curly-newline': 'off',
-        'require-jsdoc': 'off'
+        'require-jsdoc': 'off',
+        'no-new': 'off'
     }
 };
