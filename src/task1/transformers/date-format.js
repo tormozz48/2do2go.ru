@@ -22,10 +22,13 @@ class DateFormatTransformer extends BaseTransformer {
         }
 
         return data.map(item => {
+            // Клонируем элемент, чтобы не модифицировать исходный
+            const _item = _.cloneDeep(item);
             fields.forEach(field => {
-                item[field] = moment(item[field] * 1000).format(format);
+                // Время в данных указано в секундах, поэтому переводим в миллисекунды
+                _item[field] = moment(_item[field] * 1000).format(format);
             });
-            return item;
+            return _item;
         });
     }
 }
