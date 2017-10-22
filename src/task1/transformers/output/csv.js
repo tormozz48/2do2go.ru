@@ -9,7 +9,7 @@ const BaseTransformer = require('../base');
  */
 class CSVOutputTransformer extends BaseTransformer {
     parseOptions(options) {
-        return _.defaults(options, {delimiter: 0, addHeader: false});
+        return _.defaults(options, {delimiter: ',', addHeader: false});
     }
 
     transform(data) {
