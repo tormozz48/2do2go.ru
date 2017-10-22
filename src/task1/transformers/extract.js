@@ -14,10 +14,13 @@ class ExtractTransformer extends BaseTransformer {
     }
 
     transform(data) {
-        return data.map(item => {
-            item = _.get(item, 'data', {});
-            return _.pick(item, this._options.extractFields);
-        });
+        return _(data)
+            .map(item => {
+                item = _.get(item, 'data', null);
+                return item ? _.pick(item, this._options.extractFields) : null;
+            })
+            .compact()
+            .value();
     }
 }
 

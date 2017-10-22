@@ -20,10 +20,10 @@ const transformers = require('./transformers');
  */
 module.exports = (jsonData, options, output) => {
     return new transformers.JSONParseTransformer(options)
-        .next(new transformers.DateFormatTransformer(options))
+        .next(new transformers.ExtractTransformer(options))
         .next(new transformers.AggregateTransformer(options))
         .next(new transformers.SortTransformer(options))
-        .next(new transformers.ExtractTransformer(options))
+        .next(new transformers.DateFormatTransformer(options))
         .next(new transformers.OutputTransformer(output))
         .run(jsonData);
 };

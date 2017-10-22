@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 const JsonSql = require('json-sql');
-const BaseTransformer = require('./base');
+const BaseTransformer = require('../base');
 
 /**
  * @class SQLOutputTransformer
@@ -14,17 +14,12 @@ class SQLOutputTransformer extends BaseTransformer {
     }
 
     transform(data) {
-        const jsonSql = JsonSql({
-            separatedValues: false,
-            dialect: this._options.dialect
-        });
+        const {dialect, table} = this._options;
+
+        const jsonSql = JsonSql({separatedValues: false, dialect});
     
         return data
-            .map(item => jsonSql.build({
-                type: 'insert', 
-                table: this._options.table, 
-                values: item
-            }).query)
+            .map(item => jsonSql.build({type: 'insert', table, values: item}).query)
             .join('\n');
     }
 }

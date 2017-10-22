@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const BaseTransformer = require('./base');
+const BaseTransformer = require('../base');
 
 /**
  * @class JSONOutputTransformer

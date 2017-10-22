@@ -1,6 +1,5 @@
-test/**/*.test.js
+test/**/*.js
 --reporter spec
 --ui bdd
---growl
 --require ./test/setup.js
 --timeout 2000

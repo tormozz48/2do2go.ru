@@ -1,14 +1,18 @@
 'use strict';
 
-const debug = debug('task1:transformers:base');
+const debug = require('debug')('task1:transformers:base');
 
 /**
  * Базовый класс для транформеров
  * @class BaseTransformer
  */
 class BaseTransformer {
+    static create(...args) {
+        return new this(...args);
+    }
+
     constructor(options = {}) {
-        this._options = this._parseOptions(options);
+        this._options = this.parseOptions(options);
         this._lastInStack = null;
         this._next = null;
 
@@ -19,10 +23,12 @@ class BaseTransformer {
 
     /**
      * Parses transformer options 
+     * @param {Object} options
+     * @returns
      * @memberof BaseTransformer
      */
-    parseOptions() {
-        throw new Error('not implmented');
+    parseOptions(options) {
+        return options
     }
 
     /**
@@ -34,7 +40,7 @@ class BaseTransformer {
     run(data) {
         debug(`run transformer: ${this.constructor.name}`);
 
-        data = this._transform(data);
+        data = this.transform(data);
         return this._next ? this._next.run(data) : data;
     }
 
@@ -58,10 +64,12 @@ class BaseTransformer {
 
     /**
      * Transforms given data
+     * @param {Object[]|String} data
+     * @returns
      * @memberof BaseTransformer
      */
-    transform() {
-        throw new Error('not implemented');
+    transform(data) {
+        return data;
     }
 }
 

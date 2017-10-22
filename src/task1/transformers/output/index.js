@@ -8,7 +8,6 @@ const JSONOutputTransformer = require('./json');
 const SQLOutputTransformer = require('./sql');
 
 /**
-
  * @class OutputTransformer
  * @extends {BaseTransformer}
  */
@@ -22,7 +21,7 @@ class OutputTransformer extends BaseTransformer {
             'sql': SQLOutputTransformer
         }[this._options.type];
 
-        this._selectedTransformer = new SelectedTransformer(this._options);
+        this._selectedTransformer = SelectedTransformer.create(this._options);
     }
 
     parseOptions(output) {

@@ -15,7 +15,7 @@ class DateFormatTransformer extends BaseTransformer {
     }
 
     transform(data) {
-        const {fields, format} = this._options.date;
+        const {fields, format} = this._options;
 
         if(_.isEmpty(fields)) {
             return data;
