@@ -15,13 +15,15 @@ class SortTransformer extends BaseTransformer {
 
     transform(data) {
         const {field, direction} = this._options;
-    
-        const _direction = {
-            'asc': 1,
-            'desc': -1
+        const transform = {
+            'asc': _.identity,
+            'desc': _.reverse
         }[direction];
     
-        return data.sort((a, b) => _direction * (a[field] - b[field]));
+        return _(data)
+            .sortBy([field])
+            .thru(transform)
+            .value();
     }
 }
 
