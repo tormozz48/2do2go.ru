@@ -11,10 +11,7 @@ module.exports = {
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
     },
-    plugins: [
-        new webpack.NoEmitOnErrorsPlugin() //,
-        // new webpack.HotModuleReplacementPlugin()    
-    ],
+    plugins: [new webpack.NoEmitOnErrorsPlugin()],
     module: {
         loaders: [
             {

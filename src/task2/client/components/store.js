@@ -1,4 +1,4 @@
-import {createStore, combineReducers} from 'redux';
+import {createStore} from 'redux';
 import {combineForms} from 'react-redux-form';
 
 const outputInitialState = {value: 'No Data'};
@@ -25,9 +25,7 @@ export default createStore(combineForms({
             field: 'count',
             direction: 'desc'
         },
-        output: {
-            type: 'csv'
-        }
+        output: {type: 'csv'}
     },
     output: outputReducer
 }));

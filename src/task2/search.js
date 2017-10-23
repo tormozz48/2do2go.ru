@@ -10,9 +10,7 @@ module.exports = (req, res) => {
 
     const options = {
         sort, 
-        aggregate: {
-            field: 'domain'
-        },
+        aggregate: {field: 'domain'},
         extractFields: ['domain', 'score']
     };
     

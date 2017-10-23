@@ -26,5 +26,5 @@ export default connect(
         type: state.output.type,
         value: state.output.data
     }),
-    (dispatch) => ({})
+    () => ({})
 )(Output);
