@@ -6,7 +6,8 @@ const outputInitialState = {value: 'No Data'};
 const outputReducer = (state = outputInitialState, payload) => {
     switch(payload.type) {
         case 'DATA_LOADED': {
-            return {data: payload.response.data};
+            const {data, type} = payload.response;
+            return {data, type};
         }
         case 'DATA_ERROR': {
             return {data: payload.error};
@@ -19,7 +20,10 @@ const outputReducer = (state = outputInitialState, payload) => {
 
 export default createStore(combineForms({
     search: {
-        url: 'http://www.reddit.com/r/javascript/.json'
+        url: 'http://www.reddit.com/r/javascript/.json',
+        output: {
+            type: 'csv'
+        }
     },
     output: outputReducer
 }));

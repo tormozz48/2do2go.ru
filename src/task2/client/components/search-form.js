@@ -1,7 +1,9 @@
 import React from 'react';
-import {Form, Control} from 'react-redux-form';
-import {Button, FormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
+import {Form, Field, Control} from 'react-redux-form';
+import {Button, FormGroup, ControlLabel, FormControl, HelpBlock, Radio} from 'react-bootstrap';
 import * as actions from './actions';
+
+const isValidUrl = (url) => /^https?:\/\/www\.reddit\.com\/r\/\w+\/\.json$/;
 
 function FieldGroup({id, label, help, ...props }) {
     return (
@@ -15,6 +17,7 @@ function FieldGroup({id, label, help, ...props }) {
 
 export default class SearchForm extends React.Component {
     handleChange(values) {
+        console.log(this.state);
         console.log(values);
     }
 
@@ -32,7 +35,22 @@ export default class SearchForm extends React.Component {
     render() {
       return (
         <Form model="search" onSubmit={this.handleSubmit.bind(this)}>
-          <Control.text model=".url" label="Url" component={FieldGroup}/>
+          <Control.text 
+            model=".url" 
+            label="Url" 
+            component={FieldGroup} 
+            required
+            validators={isValidUrl}
+          />
+          
+          <FormGroup controlId="outputType">
+            <ControlLabel>Output Type</ControlLabel>
+            <Control.select model=".output.type" className="form-control" onChange={this.handleChange.bind(this)}>
+              <option value="csv">csv</option>
+              <option value="json">json</option>
+              <option value="sql">sql</option>
+            </Control.select>
+          </FormGroup>   
           <Button type="submit">Search</Button>
         </Form>
       );
