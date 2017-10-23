@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, Field, Control} from 'react-redux-form';
-import {Button, FormGroup, ControlLabel, FormControl, HelpBlock, Radio} from 'react-bootstrap';
+import {Button, FormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
 import * as actions from './actions';
 
 const isValidUrl = (url) => /^https?:\/\/www\.reddit\.com\/r\/\w+\/\.json$/;
@@ -15,11 +15,23 @@ function FieldGroup({id, label, help, ...props }) {
     );
 }
 
+function SelectField({id, label, model, options}) {
+    options = options.map((option) => {
+      return <option value={option}>{option}</option>;
+    });
+
+    return (
+      <FormGroup controlId={id}>
+        <ControlLabel>{label}</ControlLabel>
+        <Control.select model={model} className="form-control">
+          {options}
+        </Control.select>
+      </FormGroup>
+    );
+}
+
 export default class SearchForm extends React.Component {
     handleSubmit(values) {
-        console.log('handleSubmit');
-        console.log(values);
-
         actions.searchData(values);
     }
 
@@ -34,14 +46,12 @@ export default class SearchForm extends React.Component {
             validators={isValidUrl}
           />
           
-          <FormGroup controlId="sortField">
-            <ControlLabel>Sort Field</ControlLabel>
-            <Control.select model=".sort.field" className="form-control">
-              <option value="domain">domain</option>
-              <option value="count">count</option>
-              <option value="score">score</option>
-            </Control.select>
-          </FormGroup>
+          <SelectField
+            id="sortField"
+            label="Sort Field"
+            model=".sort.field"
+            options={["domain", "count", "score"]}
+          />
 
           <FormGroup controlId="sortDirection">
             <ControlLabel>Sort Direction</ControlLabel>
@@ -57,14 +67,13 @@ export default class SearchForm extends React.Component {
             </Field>
           </FormGroup>
 
-          <FormGroup controlId="outputType">
-            <ControlLabel>Output Type</ControlLabel>
-            <Control.select model=".output.type" className="form-control">
-              <option value="csv">csv</option>
-              <option value="json">json</option>
-              <option value="sql">sql</option>
-            </Control.select>
-          </FormGroup>   
+          <SelectField
+            id="outputType"
+            label="Output Type"
+            model=".output.type"
+            options={["csv", "json", "sql"]}
+          />
+   
           <Button type="submit">Search</Button>
         </Form>
       );

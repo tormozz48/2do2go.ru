@@ -25,8 +25,8 @@ describe('src/task1/transformers/aggregate', () => {
         const result = aggregateTransformer.run(inputData);
 
         assert.lengthOf(result, 2);
-        assert.equal(result[0].field, 'foo1');
-        assert.equal(result[1].field, 'foo2');
+        assert.equal(result[0].foo, 'foo1');
+        assert.equal(result[1].foo, 'foo2');
     });
 
     it('should count items of each group', () => {
