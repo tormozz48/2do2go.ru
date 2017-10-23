@@ -21,6 +21,10 @@ const outputReducer = (state = outputInitialState, payload) => {
 export default createStore(combineForms({
     search: {
         url: 'http://www.reddit.com/r/javascript/.json',
+        sort: {
+            field: 'count',
+            direction: 'desc'
+        },
         output: {
             type: 'csv'
         }

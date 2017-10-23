@@ -16,15 +16,6 @@ function FieldGroup({id, label, help, ...props }) {
 }
 
 export default class SearchForm extends React.Component {
-    handleChange(values) {
-        console.log(this.state);
-        console.log(values);
-    }
-
-    handleUpdate(form) {
-        console.log(form);
-    }
-    
     handleSubmit(values) {
         console.log('handleSubmit');
         console.log(values);
@@ -43,9 +34,32 @@ export default class SearchForm extends React.Component {
             validators={isValidUrl}
           />
           
+          <FormGroup controlId="sortField">
+            <ControlLabel>Sort Field</ControlLabel>
+            <Control.select model=".sort.field" className="form-control">
+              <option value="domain">domain</option>
+              <option value="count">count</option>
+              <option value="score">score</option>
+            </Control.select>
+          </FormGroup>
+
+          <FormGroup controlId="sortDirection">
+            <ControlLabel>Sort Direction</ControlLabel>
+            <Field model=".sort.direction">
+              <label className="direction-label">
+                <input className="radio" type="radio" value="asc"/>
+                Asc
+              </label>
+              <label className="direction-label">
+                <input className="radio" type="radio" value="desc"/>
+                Desc
+              </label>
+            </Field>
+          </FormGroup>
+
           <FormGroup controlId="outputType">
             <ControlLabel>Output Type</ControlLabel>
-            <Control.select model=".output.type" className="form-control" onChange={this.handleChange.bind(this)}>
+            <Control.select model=".output.type" className="form-control">
               <option value="csv">csv</option>
               <option value="json">json</option>
               <option value="sql">sql</option>

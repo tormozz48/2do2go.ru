@@ -23,7 +23,7 @@ class AggregateTransformer extends BaseTransformer {
         return _(data)
             .groupBy(field)
             .mapValues((value) => _.extend({count: value.length}, this._calculateSums(value)))
-            .map((value, key) => _.extend({field: key}, value))
+            .map((value, key) => _.extend(_.set({}, field, key), value))
             .value();
     }
 
