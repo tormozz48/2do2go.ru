@@ -1,23 +1,29 @@
 import React from 'react';
-import { Form, Field, Control } from 'react-redux-form';
+import { Form, Field, Control, Errors } from 'react-redux-form';
 import { Button, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import * as actions from './actions';
 
 const isValidUrl = (url) => /^https?:\/\/www\.reddit\.com\/r\/\w+\/\.json$/.test(url);
 
-function FieldGroup({ id, label, help, ...props }) {
+function FieldGroup({ id, label, model, help, ...props }) {
   return (
     <FormGroup controlId={id}>
       <ControlLabel>{label}</ControlLabel>
       <FormControl {...props} />
-      {help && <HelpBlock>{help}</HelpBlock>}
+      <Errors
+        model="search.url"
+        messages={{
+          isRequired: `Please provide an ${label}.`,
+          isValidUrl: () => `Invalid ${label}.`,
+        }}
+      />
     </FormGroup>
   );
 }
 
 function SelectField({ id, label, model, options }) {
-  options = options.map((option) => {
-    return <option value={option}>{option}</option>;
+  options = options.map((option, index) => {
+    return <option key={index} value={option}>{option}</option>;
   });
 
   return (
@@ -43,7 +49,8 @@ export default class SearchForm extends React.Component {
           label="Url"
           component={FieldGroup}
           required
-          validators={isValidUrl}
+          validators={{isValidUrl}}
+          validateOn="blur"
         />
 
         <SelectField
