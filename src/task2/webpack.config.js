@@ -6,14 +6,14 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: [path.join(__dirname, '/client/index.js')],
+    entry: ['babel-polyfill', path.join(__dirname, '/client/index.js')],
     output: {
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
     },
     plugins: [
-        new webpack.NoErrorsPlugin(),
-        new webpack.HotModuleReplacementPlugin()    
+        new webpack.NoEmitOnErrorsPlugin() //,
+        // new webpack.HotModuleReplacementPlugin()    
     ],
     module: {
         loaders: [
