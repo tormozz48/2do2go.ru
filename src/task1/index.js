@@ -7,6 +7,8 @@ const transformers = require('./transformers');
  * @param {Object}   [options]
  * @param {String}   [options.dataKey] - object key which holds target data
  * @param {String[]} [options.extractFields] - data fields which should be left in final result
+ * @param {Object}   [options.aggregate] - aggregation settings
+ * @param {Object}   [options.aggregate.field] - field which will be used for grouping data
  * @param {Object}   [options.sort] - sort options
  * @param {Object}   [options.sort.field] - sort field
  * @param {Object}   [options.sort.direction] - sort direction
