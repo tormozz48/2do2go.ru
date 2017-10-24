@@ -13,7 +13,7 @@ const outputReducer = (state = outputInitialState, payload) => {
             return {data: payload.error};
         }
         default: {
-            return {...state}
+            return state;
         }
     }
 };

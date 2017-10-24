@@ -19,22 +19,11 @@ const publicFolder = path.resolve(__dirname, 'public');
 const app = express();
 
 app.use(morgan('common'));
-app.use(serveStatic(publicFolder, {fallthrough: false}));
+
+app.use(serveStatic(publicFolder, {fallthrough: true}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.post('/search', search);
-
-app.use((err, req, res, next) => {
-    switch (err.status) {
-    case 404: {
-        res.redirect('/404.html');
-        break;
-    }
-    default: {
-        res.redirect('/500.html');
-    }
-    }
-});
 
 app.listen(port, () => console.log(`running on localhost:${port}`));
