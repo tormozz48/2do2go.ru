@@ -19,7 +19,8 @@ module.exports = (req, res) => {
         .then((jsonData) => dataProcessor(jsonData, options, output))
         .then((result) => res.send(result))
         .catch((error) => {
-            console.error(error.stack || error.message);
+            error = error.stack || error.message;
+            console.error(error);
             res.send(error);
         });
 };

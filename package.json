@@ -7,7 +7,7 @@
     "postinstall": "npm run build",
     "build": "node_modules/.bin/webpack --config=src/task2/webpack.config.js",
     "watch": "node_modules/.bin/webpack --config=src/task2/webpack.config.js --watch",
-    "start": "node src/task2/server.js",
+    "start": "node index.js",
     "lint": "eslint .",
     "test": "mocha"
   },
@@ -67,6 +67,7 @@
     "react-redux-form": "^1.15.0",
     "redux": "^3.7.2",
     "serve-static": "^1.13.1",
+    "supertest": "^3.0.0",
     "webpack": "^3.8.1"
   }
 }
