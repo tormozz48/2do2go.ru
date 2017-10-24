@@ -6,7 +6,6 @@
 * Склонировать репозиторий: `git clone https://github.com/tormozz48/2do2go.ru.git`
 * Перейти в директорию проекта: `cd 2do2go.ru`
 * Установить npm зависимости: `npm install`
-* Собрать проект: `npm run build`
 * Запустить сервер: `npm start`
 
 После запуска открыть в браузере: `http://localhost:3000/`
