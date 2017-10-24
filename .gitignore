@@ -3,4 +3,5 @@
 .vscode
 .history
 node_modules
+coverage
 src/task2/public/bundle.js
