@@ -1,6 +1,10 @@
 # 2do2go.ru
 Тестовое задание для [2do2go.ru](https://www.2do2go.ru/)
 
+[![Build Status](https://travis-ci.org/tormozz48/2do2go.ru.svg?branch=master)](https://travis-ci.org/tormozz48/2do2go.ru)
+[![Coverage Status](https://img.shields.io/coveralls/tormozz48/2do2go.ru.svg?style=flat)](https://coveralls.io/r/tormozz48/2do2go.ru?branch=master)
+
+
 ## Установка
 
 * Склонировать репозиторий: `git clone https://github.com/tormozz48/2do2go.ru.git`
