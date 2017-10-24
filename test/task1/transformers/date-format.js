@@ -3,6 +3,14 @@
 const {DateFormatTransformer} = require('../../../src/task1/transformers');
 
 describe('src/task1/transformers/date-format', () => {
+    let clock = null;
+
+    beforeEach(() => {
+        clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => clock.restore());
+
     it('should return unmodified data if date fields were not configured', () => {
         const dateFormatTransformer = new DateFormatTransformer({});
         const inputData = [
