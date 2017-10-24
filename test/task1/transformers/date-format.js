@@ -31,8 +31,8 @@ describe('src/task1/transformers/date-format', () => {
         assert.deepEqual(
             dateFormatTransformer.run(inputData), 
             [
-                {foo: '22.10.2017 11:11:20', bar: 'some-bar1'},
-                {foo: '22.10.2017 09:24:40', bar: 'some-bar2'}
+                {foo: '22.10.2017 08:11:20', bar: 'some-bar1'},
+                {foo: '22.10.2017 06:24:40', bar: 'some-bar2'}
             ]
         );
     });

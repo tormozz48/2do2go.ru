@@ -26,7 +26,7 @@ class DateFormatTransformer extends BaseTransformer {
             const _item = _.cloneDeep(item);
             fields.forEach(field => {
                 // Время в данных указано в секундах, поэтому переводим в миллисекунды
-                _item[field] = moment(_item[field] * 1000).format(format);
+                _item[field] = moment.utc(_item[field] * 1000).format(format);
             });
             return _item;
         });
